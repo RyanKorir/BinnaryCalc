@@ -20,13 +20,15 @@
   </header>
 
   <main class="app-shell">
+    <!-- TAB NAV -->
     <nav class="tab-nav" role="tablist">
       <button class="tab-btn active" role="tab" data-tab="calculator" aria-selected="true">Calculator</button>
       <button class="tab-btn" role="tab" data-tab="converter" aria-selected="false">Converter</button>
       <button class="tab-btn" role="tab" data-tab="bitwise" aria-selected="false">Bitwise</button>
+      <button class="tab-btn" role="tab" data-tab="ip" aria-selected="false">IP / Subnet</button>
     </nav>
 
-    <!-- CALCULATOR TAB -->
+    <!-- ── CALCULATOR TAB ── -->
     <section class="tab-panel active" id="tab-calculator">
       <div class="panel-body">
         <div class="input-group">
@@ -72,7 +74,7 @@
       </div>
     </section>
 
-    <!-- CONVERTER TAB -->
+    <!-- ── CONVERTER TAB ── -->
     <section class="tab-panel" id="tab-converter" hidden>
       <div class="panel-body">
         <p class="panel-intro">Enter a value in any base — the rest update instantly.</p>
@@ -105,7 +107,7 @@
       </div>
     </section>
 
-    <!-- BITWISE TAB -->
+    <!-- ── BITWISE TAB ── -->
     <section class="tab-panel" id="tab-bitwise" hidden>
       <div class="panel-body">
         <div class="input-group">
@@ -139,6 +141,73 @@
         <div class="step-card" id="bwSteps" hidden>
           <div class="step-header">Truth Table</div>
           <div class="step-body" id="bwStepBody"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── IP / SUBNET TAB ── -->
+    <section class="tab-panel" id="tab-ip" hidden>
+      <div class="panel-body">
+        <p class="panel-intro">Enter an IPv4 address and subnet mask — get the full binary breakdown and all network info.</p>
+
+        <!-- IP Input -->
+        <div class="ip-input-group">
+          <label class="input-label">IPv4 Address</label>
+          <div class="octet-row">
+            <input class="octet-input" id="ip0" type="text" maxlength="3" placeholder="192" />
+            <span class="octet-dot">.</span>
+            <input class="octet-input" id="ip1" type="text" maxlength="3" placeholder="168" />
+            <span class="octet-dot">.</span>
+            <input class="octet-input" id="ip2" type="text" maxlength="3" placeholder="1" />
+            <span class="octet-dot">.</span>
+            <input class="octet-input" id="ip3" type="text" maxlength="3" placeholder="1" />
+          </div>
+          <span class="input-error" id="ipErr"></span>
+        </div>
+
+        <!-- Subnet -->
+        <div class="ip-input-group">
+          <label class="input-label">Subnet Mask <span class="base-tag">CIDR or dotted</span></label>
+          <div class="subnet-row">
+            <span class="cidr-slash">/</span>
+            <input class="cidr-input" id="cidrInput" type="number" min="0" max="32" placeholder="24" />
+            <span class="cidr-or">or</span>
+            <input class="octet-input sm" id="sm0" type="text" maxlength="3" placeholder="255" />
+            <span class="octet-dot">.</span>
+            <input class="octet-input sm" id="sm1" type="text" maxlength="3" placeholder="255" />
+            <span class="octet-dot">.</span>
+            <input class="octet-input sm" id="sm2" type="text" maxlength="3" placeholder="255" />
+            <span class="octet-dot">.</span>
+            <input class="octet-input sm" id="sm3" type="text" maxlength="3" placeholder="0" />
+          </div>
+          <span class="input-error" id="smErr"></span>
+        </div>
+
+        <button class="calc-btn" id="ipCalcBtn">Analyse</button>
+
+        <!-- IP Binary Breakdown -->
+        <div class="result-card" id="ipBinResult" hidden>
+          <div class="result-header">
+            <span class="result-title">Binary Breakdown</span>
+            <button class="copy-btn" id="copyIP">Copy</button>
+          </div>
+          <div class="ip-binary-grid" id="ipBinaryGrid">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+        <!-- Network Info -->
+        <div class="step-card" id="ipNetInfo" hidden>
+          <div class="step-header">Network Information</div>
+          <div class="ip-info-grid" id="ipInfoGrid">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+        <!-- IP Class explain -->
+        <div class="step-card" id="ipClassCard" hidden>
+          <div class="step-header">IP Class & Explanation</div>
+          <div class="step-body" id="ipClassBody"></div>
         </div>
       </div>
     </section>
