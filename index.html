@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BinCalc — Binary Calculator & Converter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-icon">01</span>
+        <span class="brand-name">BinCalc</span>
+      </div>
+      <p class="brand-sub">Calculate · Convert · Understand</p>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <nav class="tab-nav" role="tablist">
+      <button class="tab-btn active" role="tab" data-tab="calculator" aria-selected="true">Calculator</button>
+      <button class="tab-btn" role="tab" data-tab="converter" aria-selected="false">Converter</button>
+      <button class="tab-btn" role="tab" data-tab="bitwise" aria-selected="false">Bitwise</button>
+    </nav>
+
+    <!-- CALCULATOR TAB -->
+    <section class="tab-panel active" id="tab-calculator">
+      <div class="panel-body">
+        <div class="input-group">
+          <label class="input-label" for="num1">Number A <span class="base-tag">binary</span></label>
+          <input class="bin-input" id="num1" type="text" placeholder="e.g. 101101" maxlength="32" autocomplete="off" spellcheck="false" />
+          <span class="input-error" id="err1"></span>
+        </div>
+        <div class="op-row" role="group" aria-label="Operation">
+          <button class="op-btn active" data-op="+">+</button>
+          <button class="op-btn" data-op="−">−</button>
+          <button class="op-btn" data-op="×">×</button>
+          <button class="op-btn" data-op="÷">÷</button>
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="num2">Number B <span class="base-tag">binary</span></label>
+          <input class="bin-input" id="num2" type="text" placeholder="e.g. 1101" maxlength="32" autocomplete="off" spellcheck="false" />
+          <span class="input-error" id="err2"></span>
+        </div>
+        <button class="calc-btn" id="calcBtn">Calculate</button>
+        <div class="result-card" id="calcResult" hidden>
+          <div class="result-header">
+            <span class="result-title">Result</span>
+            <button class="copy-btn" id="copyCalc">Copy</button>
+          </div>
+          <div class="result-grid">
+            <div class="result-row"><span class="result-label">Binary</span><span class="result-value mono" id="resBin"></span></div>
+            <div class="result-row"><span class="result-label">Decimal</span><span class="result-value mono" id="resDec"></span></div>
+            <div class="result-row"><span class="result-label">Hexadecimal</span><span class="result-value mono" id="resHex"></span></div>
+            <div class="result-row"><span class="result-label">Octal</span><span class="result-value mono" id="resOct"></span></div>
+          </div>
+        </div>
+        <div class="step-card" id="calcSteps" hidden>
+          <div class="step-header">Step-by-Step Breakdown</div>
+          <div class="step-body" id="stepBody"></div>
+        </div>
+        <div class="history-section" id="historySection" hidden>
+          <div class="history-header">
+            <span>History</span>
+            <button class="clear-btn" id="clearHistory">Clear</button>
+          </div>
+          <ul class="history-list" id="historyList"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONVERTER TAB -->
+    <section class="tab-panel" id="tab-converter" hidden>
+      <div class="panel-body">
+        <p class="panel-intro">Enter a value in any base — the rest update instantly.</p>
+        <div class="conv-grid">
+          <div class="conv-field">
+            <label class="input-label" for="cvBin">Binary <span class="base-tag">base 2</span></label>
+            <input class="bin-input" id="cvBin" type="text" placeholder="101101" maxlength="64" autocomplete="off" spellcheck="false" />
+            <span class="input-error" id="cvErrBin"></span>
+          </div>
+          <div class="conv-field">
+            <label class="input-label" for="cvDec">Decimal <span class="base-tag">base 10</span></label>
+            <input class="bin-input" id="cvDec" type="text" placeholder="45" maxlength="20" autocomplete="off" spellcheck="false" />
+            <span class="input-error" id="cvErrDec"></span>
+          </div>
+          <div class="conv-field">
+            <label class="input-label" for="cvHex">Hexadecimal <span class="base-tag">base 16</span></label>
+            <input class="bin-input" id="cvHex" type="text" placeholder="2D" maxlength="16" autocomplete="off" spellcheck="false" />
+            <span class="input-error" id="cvErrHex"></span>
+          </div>
+          <div class="conv-field">
+            <label class="input-label" for="cvOct">Octal <span class="base-tag">base 8</span></label>
+            <input class="bin-input" id="cvOct" type="text" placeholder="55" maxlength="22" autocomplete="off" spellcheck="false" />
+            <span class="input-error" id="cvErrOct"></span>
+          </div>
+        </div>
+        <div class="result-card" id="convLearn" hidden>
+          <div class="step-header">How does it work?</div>
+          <div class="step-body" id="convLearnBody"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BITWISE TAB -->
+    <section class="tab-panel" id="tab-bitwise" hidden>
+      <div class="panel-body">
+        <div class="input-group">
+          <label class="input-label" for="bwNum1">Number A <span class="base-tag">binary</span></label>
+          <input class="bin-input" id="bwNum1" type="text" placeholder="1010" maxlength="8" autocomplete="off" spellcheck="false" />
+          <span class="input-error" id="bwErr1"></span>
+        </div>
+        <div class="op-row bw-ops" role="group" aria-label="Bitwise operation">
+          <button class="op-btn active" data-bwop="AND">AND</button>
+          <button class="op-btn" data-bwop="OR">OR</button>
+          <button class="op-btn" data-bwop="XOR">XOR</button>
+          <button class="op-btn" data-bwop="NOT">NOT</button>
+        </div>
+        <div class="input-group" id="bwNum2Group">
+          <label class="input-label" for="bwNum2">Number B <span class="base-tag">binary</span></label>
+          <input class="bin-input" id="bwNum2" type="text" placeholder="1100" maxlength="8" autocomplete="off" spellcheck="false" />
+          <span class="input-error" id="bwErr2"></span>
+        </div>
+        <button class="calc-btn" id="bwCalcBtn">Apply</button>
+        <div class="result-card" id="bwResult" hidden>
+          <div class="result-header">
+            <span class="result-title">Result</span>
+            <button class="copy-btn" id="copyBw">Copy</button>
+          </div>
+          <div class="result-grid">
+            <div class="result-row"><span class="result-label">Binary</span><span class="result-value mono" id="bwResBin"></span></div>
+            <div class="result-row"><span class="result-label">Decimal</span><span class="result-value mono" id="bwResDec"></span></div>
+            <div class="result-row"><span class="result-label">Hex</span><span class="result-value mono" id="bwResHex"></span></div>
+          </div>
+        </div>
+        <div class="step-card" id="bwSteps" hidden>
+          <div class="step-header">Truth Table</div>
+          <div class="step-body" id="bwStepBody"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>BinCalc — Binary Calculator &amp; Converter · Built by Ryan Korir</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
