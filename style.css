@@ -106,3 +106,126 @@ body {
   .result-label { min-width: 5.5rem; }
   .op-btn { width: 2.6rem; height: 2.6rem; font-size: 1rem; }
 }
+
+/* ═══ IP / SUBNET TAB ADDITIONS ═══ */
+.ip-input-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+.octet-row, .subnet-row {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+.octet-input {
+  font-family: var(--mono);
+  font-size: 1rem;
+  font-weight: 600;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  width: 3.4rem;
+  padding: 0.55rem 0.4rem;
+  border-radius: var(--radius);
+  text-align: center;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.octet-input.sm { width: 3rem; font-size: 0.9rem; }
+.octet-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(57,208,194,0.15); }
+.octet-input.error { border-color: var(--danger); }
+.octet-dot { font-family: var(--mono); font-weight: 700; color: var(--text-sub); font-size: 1.2rem; }
+
+.cidr-slash { font-family: var(--mono); font-weight: 700; color: var(--accent); font-size: 1.3rem; margin-right: 0.1rem; }
+.cidr-input {
+  font-family: var(--mono);
+  font-size: 1rem;
+  font-weight: 600;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  width: 3.4rem;
+  padding: 0.55rem 0.4rem;
+  border-radius: var(--radius);
+  text-align: center;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.cidr-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(57,208,194,0.15); }
+.cidr-or { font-size: 0.75rem; color: var(--text-sub); margin: 0 0.4rem; }
+
+/* IP Binary Grid */
+.ip-binary-grid { padding: 0.75rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.ip-bin-row {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+}
+.ip-bin-label { color: var(--text-sub); font-weight: 500; font-size: 0.78rem; }
+.ip-bin-octets {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+.ip-bin-octet {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.2rem 0.4rem;
+  white-space: nowrap;
+}
+.ip-bin-octet.net-part { color: var(--accent); border-color: var(--accent); background: rgba(57,208,194,0.08); }
+.ip-bin-octet.host-part { color: #f0883e; border-color: #f0883e; background: rgba(240,136,62,0.08); }
+.ip-bin-octet.mask-part { color: var(--text-sub); }
+.ip-bin-octet.wildcard-part { color: #a371f7; border-color: #a371f7; background: rgba(163,113,247,0.08); }
+
+.ip-bin-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0.25rem 0;
+}
+
+/* Network info grid */
+.ip-info-grid {
+  padding: 0.5rem 0;
+}
+.ip-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.5rem 1rem;
+  gap: 1rem;
+  font-size: 0.83rem;
+}
+.ip-info-row:nth-child(odd) { background: rgba(255,255,255,0.02); }
+.ip-info-key { color: var(--text-sub); font-weight: 500; min-width: 9rem; }
+.ip-info-val { font-family: var(--mono); font-weight: 700; color: var(--accent); text-align: right; word-break: break-all; }
+.ip-info-val.net { color: var(--accent); }
+.ip-info-val.host { color: #f0883e; }
+.ip-info-val.neutral { color: var(--text); }
+
+.legend-row {
+  display: flex;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+  margin-top: 0.25rem;
+}
+.legend-item { display: flex; align-items: center; gap: 0.35rem; font-size: 0.72rem; color: var(--text-sub); }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+.legend-dot.net { background: var(--accent); }
+.legend-dot.host { background: #f0883e; }
+.legend-dot.wild { background: #a371f7; }
+
+@media (max-width: 500px) {
+  .octet-input { width: 2.8rem; font-size: 0.9rem; }
+  .ip-bin-row { grid-template-columns: 4.5rem 1fr; }
+  .ip-bin-octet { font-size: 0.72rem; padding: 0.15rem 0.3rem; }
+  .cidr-input { width: 2.8rem; }
+  .subnet-row { gap: 0.2rem; }
+}
